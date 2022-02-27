@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Main Regular";
+  src: url("../fonts/Mulish/Mulish-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Main Bold";
+  src: url("../fonts/Mulish/Mulish-Bold.ttf");
+}
+
+@font-face {
+  font-family: "Main SemiBold";
+  src: url("../fonts/Mulish/Mulish-SemiBold.ttf");
+}
+
+@font-face {
+  font-family: "Main ExtraBold";
+  src: url("../fonts/Mulish/Mulish-ExtraBold.ttf");
+}
+
+@font-face {
+  font-family: "Main Black";
+  src: url("../fonts/Mulish/Mulish-Black.ttf");
+}
+
+@font-face {
+  font-family: "Main Light";
+  src: url("../fonts/Mulish/Mulish-Light.ttf");
+}
+
+@font-face {
+  font-family: "Main Medium";
+  src: url("../fonts/Mulish/Mulish-Medium.ttf");
+}
+
+body {
+  margin: 0px;
+}
+
+p {
+  margin-block: 0px;
+}
+
+.error-box {
+  border: 1px solid #eb0202;
+  font-family: "Main Medium";
+  color: #eb0202;
+  font-size: 14px;
+  padding: 16px;
+  border-radius: 4px;
+  width: "100%";
+  background-color: #ffbfc6;
+}
+
+a {
+  text-decoration: none;
+}
