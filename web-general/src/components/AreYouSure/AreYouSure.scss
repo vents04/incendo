@@ -1,0 +1,24 @@
+@import "../../../assets/styles/global.styles.css";
+
+.options-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.modal-option {
+  font-family: "Main Regular", sans-serif;
+  width: 50%;
+  text-align: center;
+}
+
+.highlighted-text {
+  font-family: "Main Bold", sans-serif;
+  color: #66d37e;
+}
+
+@media only screen and (max-width: 768px) {
+  .modal-option {
+    text-align: left;
+  }
+}

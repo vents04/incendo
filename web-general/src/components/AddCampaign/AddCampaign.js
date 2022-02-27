@@ -16,6 +16,10 @@ export default class AddCampaign extends Component {
         error: "test error"
     }
 
+    addCampaign = () => {
+
+    }
+
     render() {
         return (
             <div className="centered-content">
@@ -60,7 +64,7 @@ export default class AddCampaign extends Component {
                             }} />
                         </div>
                         {this.state.showError && <p className="error-box">{this.state.error}</p>}
-                        <button className="action-button-modal">Submit</button>
+                        <button className="action-button-modal" onClick={this.addCampaign}>Submit</button>
                     </div>
                 </div>
             </div >
