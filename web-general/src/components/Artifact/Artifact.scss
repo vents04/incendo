@@ -1,0 +1,27 @@
+@import "../../../assets/styles/global.styles.css";
+
+.artifact {
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 0.5rem 0rem;
+}
+
+.artifact-title {
+  font-family: "Main Bold", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.artifact-field-value {
+  font-family: "Main Regular", sans-serif;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.artifact-view-more {
+  font-family: "Main Regular", sans-serif;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

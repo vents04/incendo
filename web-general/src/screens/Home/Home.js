@@ -74,7 +74,7 @@ export default class Home extends Component {
             <div className="section-content">
               <div className="campaigns">
                 <div className="campaign-container">
-                  <Link to="/edit-campaign/1">
+                  <Link to="/view-campaign/1">
                     <div className="campaign">
                       <div className="campaign-topbar">
                         <p className="campaign-type">Shuffle</p>

@@ -1,0 +1,55 @@
+@import "../../../assets/styles/global.styles.css";
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 3rem;
+}
+
+.logo {
+  color: #66d37e;
+  margin-right: 0.5rem;
+}
+
+.logo-title-navbar {
+  font-family: "Main Black", sans-serif;
+  font-size: 28px;
+  color: black;
+  margin-left: 8px;
+}
+
+.campaigns {
+  margin: 0rem 3rem;
+}
+
+.campaign {
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e7e7e7;
+  padding: 1rem;
+}
+
+.campaign-title {
+  font-family: "Main Bold", sans-serif;
+  font-size: 20px;
+}
+
+.campaign-status {
+  padding: 0.5rem;
+  color: white;
+  font-family: "Main Bold", sans-serif;
+  font-size: 12px;
+  border-radius: 4px;
+  width: max-content;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.campaign-status-ok {
+  background-color: #66d37e;
+}
+
+.campaign-status-not-ok {
+  background-color: #eb0202;
+}

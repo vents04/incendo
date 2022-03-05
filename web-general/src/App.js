@@ -5,6 +5,7 @@ import Home from './screens/Home/Home';
 import Index from './screens/Index/Index';
 import Login from './screens/Login/Login';
 import Signup from './screens/Signup/Signup';
+import ViewCampaign from './screens/ViewCampaign/ViewCampaign';
 
 class App extends React.Component {
     render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/edit-campaign/:id" element={<EditCampaign />} />
+                    <Route path="/view-campaign/:id" element={<ViewCampaign />} />
                 </Routes>
             </BrowserRouter>
         )

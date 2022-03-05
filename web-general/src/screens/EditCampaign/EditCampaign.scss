@@ -1,19 +1,5 @@
 @import "../../../assets/styles/global.styles.css";
 
-.topbar-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 2rem 1rem 0rem 1rem;
-}
-
-.topbar-title {
-  font-family: "Main Bold", sans-serif;
-  font-size: 1.25rem;
-  margin-left: 8px;
-  margin-bottom: 8px;
-}
-
 .modal-input,
 .action-button-modal {
   max-width: 500px;
@@ -26,4 +12,11 @@
   font-family: "Main Regular", sans-serif;
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+.modal-input-notation {
+  font-family: "Main Regular", sans-serif;
+  font-size: 0.75rem;
+  margin: 0.5rem 0rem;
+  color: red;
 }
