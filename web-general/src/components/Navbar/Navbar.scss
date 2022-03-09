@@ -1,0 +1,50 @@
+@import "../../../assets/styles/global.styles.css";
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+  height: calc(100vh - 3rem);
+  background-color: #fafafa;
+  padding: 1.5rem;
+}
+
+.navbar-logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo-container > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navbar-logo-title {
+  font-family: "Main Black", sans-serif;
+  font-size: 1.5rem;
+  margin-left: 0.5rem;
+}
+
+.navbar-menu {
+  margin-top: 1rem;
+}
+
+.navbar-menu-item {
+  padding: 0.5rem 0rem;
+  cursor: pointer;
+  font-family: "Main Regular", sans-serif;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    width: calc(100vw - 3rem);
+    position: absolute;
+    height: calc(100vh - 3rem);
+  }
+  .navbar-menu-item {
+    font-size: 1.25rem;
+  }
+}

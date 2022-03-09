@@ -1,0 +1,21 @@
+@import "../../../assets/styles/global.styles.css";
+
+.contact-item {
+  border: 1px solid #e7e7e7;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.contact-item-value {
+  font-family: "Main Regular", sans-serif;
+  font-size: 1.15rem;
+  margin-left: 1rem;
+}

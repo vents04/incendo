@@ -52,13 +52,36 @@ p {
   background-color: #ffbfc6;
 }
 
+.important {
+  border: 1px solid #66d37e;
+  font-family: "Main Bold";
+  color: #fff;
+  font-size: 14px;
+  padding: 16px;
+  border-radius: 4px;
+  width: "100%";
+  background-color: #66d37e;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 a {
   text-decoration: none;
-  color: none;
+  color: black;
 }
 
 .page-container {
-  padding: 0rem 3rem;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+}
+
+.page-contents-container {
+  width: 88%;
+  height: calc(100vh - 6rem);
 }
 
 .action-button {
@@ -76,4 +99,35 @@ a {
   font-family: "Main Regular", sans-serif;
   color: #ccc;
   font-size: 0.9rem;
+}
+
+.text {
+  font-family: "Main Medium", sans-serif;
+  color: #262626;
+  font-size: 1rem;
+}
+
+.page-contents-container {
+  padding: 3rem;
+}
+
+.page-title {
+  font-family: "Main Black", sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.page-section {
+  margin: 2rem 0rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-section-title {
+  font-family: "Main ExtraBold", sans-serif;
+  text-transform: uppercase;
+}
+
+.page-section-content {
+  margin-top: 0.5rem;
 }
