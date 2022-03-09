@@ -1,1 +1,29 @@
 @import "../../../assets/styles/global.styles.css";
+
+.license {
+  width: max-content;
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  padding: 2rem;
+}
+
+.license-topbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.license-image {
+  height: 30px;
+}
+
+.license-title {
+  font-family: "Main Bold", sans-serif;
+  font-size: 1.25rem;
+  margin-left: 1rem;
+}
+
+.license .action-button {
+  width: 100%;
+  margin-top: 1rem;
+}
