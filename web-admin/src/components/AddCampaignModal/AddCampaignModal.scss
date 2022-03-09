@@ -1,0 +1,63 @@
+@import "../../../assets/styles/global.styles.css";
+
+.modal-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px !important;
+}
+
+.modal-container {
+  width: 400px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-family: "Main Bold", sans-serif;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.7rem;
+  margin: 1rem 0rem;
+}
+
+.modal-notation {
+  font-family: "Main Regular", sans-serif;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.modal-input {
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  font-family: "Main Regular", sans-serif;
+  font-size: 0.9rem;
+  color: #262626;
+  padding: 0.5rem 0.75rem;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,73 @@
+@import "../../../assets/styles/global.styles.css";
+
+.campaign-delete-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.campaign-topbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.campaign-topbar-item {
+  font-family: "Main Regular", sans-serif;
+  font-size: 0.9rem;
+  color: #262626;
+  padding: 0rem 0.25rem;
+}
+
+.campaign {
+  margin-bottom: 1rem;
+  border-radius: 4px;
+  border: 1px solid #e7e7e7;
+  padding: 1rem;
+  position: relative;
+}
+
+.campaign-name {
+  font-family: "Main Bold", sans-serif;
+  font-size: 20px;
+}
+
+.campaign-status {
+  font-family: "Main Bold", sans-serif;
+}
+
+.campaign-status-ok {
+  color: #66d37e;
+}
+
+.campaign-status-not-ok {
+  color: #eb0202;
+}
+
+.campaign-description {
+  font-family: "Main Regular", sans-serif;
+  font-size: 14px;
+  color: #aaa;
+  margin-top: 8px;
+}
+
+.remove-padding-left {
+  padding-left: 0px;
+}
+
+.campaign-view-more-toggle-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+  cursor: pointer;
+}
+
+.campaign-view-more-toggle-title {
+  font-family: "Main SemiBold", sans-serif;
+  font-size: 0.9rem;
+  margin-right: 6px;
+}

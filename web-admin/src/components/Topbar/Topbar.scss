@@ -1,0 +1,20 @@
+@import "../../../assets/styles/global.styles.css";
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3rem;
+}
+
+.logo {
+  color: #66d37e;
+  margin-right: 0.5rem;
+}
+
+.logo-title-navbar {
+  font-family: "Main Black", sans-serif;
+  font-size: 28px;
+  color: black;
+  margin-left: 8px;
+}

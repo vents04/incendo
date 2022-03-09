@@ -12,4 +12,5 @@ const URLS = {
 module.exports = {
     ROOT_URL_API: URLS.DEVELOPMENT.API,
     ROOT_URL_PORTAL: URLS.DEVELOPMENT.APP,
+    AUTHENTICATION_TOKEN_KEY: "x-auth-token"
 }
