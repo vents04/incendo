@@ -1,0 +1,34 @@
+@import "../../../assets/styles/global.styles.css";
+
+.organization {
+  border: 1px solid #e7e7e7;
+  border-radius: 4px;
+  padding: 1rem;
+  margin: 0.5rem 0rem;
+}
+
+.organization-title {
+  font-family: "Main Bold", sans-serif;
+  font-size: 20px;
+}
+
+.organization-description {
+  font-family: "Main Regular", sans-serif;
+  color: #aaa;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.organization-view-campaigns-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.organization-view-campaigns-toggle-title {
+  font-family: "Main SemiBold", sans-serif;
+  font-size: 0.9rem;
+  margin-right: 6px;
+}
