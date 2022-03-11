@@ -1,9 +1,9 @@
 @import "../../../assets/styles/global.styles.css";
 
 .campaign-container {
-  flex: calc(50% - 2rem);
+  flex: 50%;
   margin-bottom: 20px;
-  max-width: calc(50% - 2rem);
+  max-width: 50%;
   margin-right: 1rem;
   height: 100%;
 }
@@ -124,7 +124,7 @@
   padding: 0.5rem 0.75rem;
   border: 1px solid #e7e7e7;
   border-radius: 4px;
-  width: calc(100% - 1.5rem);
+  width: 100%;
   font-family: "Main Regular", sans-serif;
   font-size: 16px;
 }

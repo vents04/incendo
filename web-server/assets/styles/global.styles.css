@@ -33,6 +33,10 @@
   src: url("../fonts/Mulish/Mulish-Medium.ttf");
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0px;
 }
