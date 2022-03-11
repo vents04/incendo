@@ -10,11 +10,11 @@ const URLS = {
 }
 
 const CAMPAIGN_STATES = {
-    ACTIVE: "Active",
-    INACTIVE: "Inactive",
-    SEALED: "Sealed",
-    FINISHED: "Finished",
-    FAILED: "Failed",
+    ACTIVE: "ACTIVE",
+    INACTIVE: "INACTIVE",
+    SEALED: "SEALED",
+    FINISHED: "FINISHED",
+    FAILED: "FAILED",
 }
 
 module.exports = {

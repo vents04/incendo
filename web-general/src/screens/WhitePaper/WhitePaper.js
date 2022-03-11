@@ -10,6 +10,7 @@ export default class WhitePaper extends Component {
                 <Navbar activeMenu="white-paper" />
                 <div className="page-contents-container">
                     <p className="page-title">White paper</p>
+                    <p className="notation">This page is under development.</p>
                 </div>
             </div>
         )
