@@ -8,6 +8,7 @@ export default class Home extends Component {
                 <Navbar activeMenu="home" />
                 <div className="page-contents-container">
                     <p className="page-title">Home</p>
+                    <p className="notation">This page is under development.</p>
                 </div>
             </div>
         )

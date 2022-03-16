@@ -57,7 +57,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <Navbar showAuthButtons={false} />
+        <Navbar showAuthButtons={true} />
         {this.state.showAddCampaignModal && <AddCampaign toggleShowAddCampaignModal={this.toggleShowAddCampaignModal} />}
         {this.state.showAreYouSureModal && <AreYouSure
           intention={this.state.intention}
