@@ -1,15 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Data.Models;
 using Data.Models.InputModels;
+using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Common;
+using Services.Authentication;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Services.Authentication;
-using Data.Models;
 
 namespace ServerAPI.Controllers
 {
@@ -28,17 +24,11 @@ namespace ServerAPI.Controllers
             _authService = authService;
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("ok");
-        }
-
-        [HttpPost("/login")]
+        [HttpPost("login")]
         public IActionResult Login(OrganisationUserLoginInputModel input)
         {
             if (!ModelState.IsValid) return BadRequest("Invalid request structure");
-            var item = _dbContext.OrganisationUsers.Find(input.Name);
+            var item = _dbContext.OrganisationUsers.FirstOrDefault(user => user.Name == input.Name);
             if (item == null) return NotFound();
             var hash = Encoding.ASCII.GetString(cryptoProvider.ComputeHash(Encoding.ASCII.GetBytes(input.Password)));
             if (item.PasswordHash != hash) return BadRequest("Invalid password or name");
@@ -51,11 +41,11 @@ namespace ServerAPI.Controllers
             }));
         }
 
-        [HttpPost("/register")]
+        [HttpPost("register")]
         public IActionResult Register(OrganisationUserRegisterInputModel input)
         {
             if (!ModelState.IsValid) return BadRequest("Invalid request structure");
-            var item = _dbContext.OrganisationUsers.Find(input.Name);
+            var item = _dbContext.OrganisationUsers.FirstOrDefault(user => user.Name == input.Name);
             if (item != null) return BadRequest("User already exists");
             _dbContext.OrganisationUsers.Add(new OrganisationUser()
             {

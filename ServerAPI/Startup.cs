@@ -1,14 +1,11 @@
-using ServerAPI.Common;
-using Data;
-using Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServerAPI.Common;
 using Services.Authentication;
-using System.Text.Json.Serialization;
 
 namespace ServerAPI
 {
@@ -28,7 +25,6 @@ namespace ServerAPI
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("mainDB")));
             services.AddScoped<IAuthService, JWTService>(sp =>
             {
-                IAuthService service = sp.GetRequiredService<IAuthService>();
                 string secret = Configuration.GetSection("Security").GetSection("JWTKey").Value;
                 return new JWTService(secret);
             });
