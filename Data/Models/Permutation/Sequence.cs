@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +9,24 @@ namespace Data.Models
 {
     public class Sequence
     {
-        public int[] Indexes { get; set; }
+        public Guid Id { get; set; }
+        private string indexes { get; set; }
+
+        [NotMapped]
+        public int[] Indexes
+        {
+            get
+            {
+                return Array.ConvertAll(indexes.Split(';'), Int32.Parse);
+            }
+            set
+            {
+                indexes = string.Join(";", value.Select(p => p.ToString()).ToArray());
+            }
+        }
+
+        private Sequence()
+        { }
 
         public Sequence(int[] array)
         {

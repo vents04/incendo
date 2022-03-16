@@ -9,6 +9,10 @@ namespace Data.Models
         public string data { get; set; }
         public CampaignEventType Type { get; set; }
 
+        private CampaignEvent()
+        {
+        }
+
         public CampaignEvent(CampaignEventType type, string data)
         {
             this.data = data;
