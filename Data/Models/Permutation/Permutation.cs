@@ -6,6 +6,7 @@ namespace Data.Models
 {
     public class Permutation
     {//TODO: implement with sequence
+        public Guid Id { get; set; }
         public int Length { get; set; }
         public string EncryptedSequence { get; set; }
         public string SequenceHash { get; set; }

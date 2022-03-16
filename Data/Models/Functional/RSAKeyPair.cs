@@ -7,10 +7,15 @@ namespace Data.Models
 {
     public class RSAKeyPair
     {
+        public Guid Id { get; set; }
         public const int RSABitCount = 2048;
         public readonly string PublicKey;
         public readonly string PrivateKey;
         public readonly RSACryptoServiceProvider Provider;
+
+        private RSAKeyPair()
+        {
+        }
 
         private RSAKeyPair(string publicKey, string privateKey, RSACryptoServiceProvider provider)
         {

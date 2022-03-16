@@ -10,7 +10,6 @@ namespace Data.Models
 {
     public class Campaign : IArtefactable<Campaign>
     {
-        public Dictionary<string, Modification> ParticipantPublicKeyToModification { get; set; }
         public List<CampaignPhase> Phases { get; set; }
         public Guid Id { get; set; }
         public string OrganisationPublicKey { get; set; }
@@ -19,7 +18,7 @@ namespace Data.Models
         public List<CampaignEvent> Events { get; set; }
         public CampaignState State { get; set; }
         public DateTime LastStateChange { get; set; }
-        public CampaignOutcome outcome { get; set; }
+        public CampaignOutcome Outcome { get; set; }
 
         public int Phase
         {
@@ -29,6 +28,11 @@ namespace Data.Models
         public DateTime FinishTime { get; set; }
         public DateTime ActivationTime { get; set; }
         public string Hash { get; set; }
+
+        public Campaign()
+        {
+            Id = Guid.NewGuid();
+        }
 
         public Campaign(CampaignConfiguration configuration)
         {
@@ -127,7 +131,7 @@ namespace Data.Models
             var currentPhase = Phases[Phases.Count - 1];
             Modification modification = Modification.FromArtefact(artefact);
             if (currentPhase.ParticipantPublicKeyToModification.ContainsKey(artefact.ParticipantPublicKey)) throw new ContractException(ContractError.DuplicateParticipant);
-            currentPhase.ParticipantPublicKeyToModification.Add(artefact.ParticipantPublicKey, modification);
+            currentPhase.AddModification(artefact.ParticipantPublicKey, modification);
 
             Events.Add(new CampaignEvent(CampaignEventType.ModificationReceived, modification.GetArtefact().ToString()));
             return modification.GetConfirmationArtefact();
@@ -207,7 +211,7 @@ namespace Data.Models
 
         public virtual CampaignOutcome GetOutcome()
         {
-            return outcome;//TODO: change behaviour in decsendands (different campaign types)
+            return Outcome;//TODO: change behaviour in decsendands (different campaign types)
         }
 
         public CampignOutcomeArtefact GetOutcomeArtefact()
