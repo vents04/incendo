@@ -9,6 +9,11 @@ using System.Text;
 
 namespace ServerAPI.Controllers
 {
+    internal class TokenResponse
+    {
+        public string token { get; set; }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -32,13 +37,16 @@ namespace ServerAPI.Controllers
             if (item == null) return NotFound();
             var hash = Encoding.ASCII.GetString(cryptoProvider.ComputeHash(Encoding.ASCII.GetBytes(input.Password)));
             if (item.PasswordHash != hash) return BadRequest("Invalid password or name");
-            return Ok(_authService.GenerateToken(new JWTContainerModel()
+            return Ok(new TokenResponse
             {
-                Claims = new System.Security.Claims.Claim[] {
+                token = _authService.GenerateToken(new JWTContainerModel()
+                {
+                    Claims = new System.Security.Claims.Claim[] {
                     new System.Security.Claims.Claim("Name", item.Name),
                     new System.Security.Claims.Claim("Id", item.Id.ToString()),
                 }
-            }));
+                })
+            });
         }
 
         [HttpPost("register")]
@@ -53,7 +61,17 @@ namespace ServerAPI.Controllers
                 PasswordHash = Encoding.ASCII.GetString(cryptoProvider.ComputeHash(Encoding.ASCII.GetBytes(input.Password)))
                 //TODO:bind other parameters
             });
-            return Ok();
+            _dbContext.SaveChanges();
+            return Ok(new TokenResponse
+            {
+                token = _authService.GenerateToken(new JWTContainerModel()
+                {
+                    Claims = new System.Security.Claims.Claim[] {
+                    new System.Security.Claims.Claim("Name", item.Name),
+                    new System.Security.Claims.Claim("Id", item.Id.ToString()),
+                }
+                })
+            });
         }
     }
 }

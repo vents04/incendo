@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Data.Models;
+using System.Text;
 
 namespace Services.Authentication
 {
@@ -112,7 +113,7 @@ namespace Services.Authentication
 
         private SecurityKey GetSymmetricSecurityKey()
         {
-            byte[] symmetricKey = Convert.FromBase64String(SecretKey);
+            byte[] symmetricKey = Encoding.ASCII.GetBytes(SecretKey);
             return new SymmetricSecurityKey(symmetricKey);
         }
 

@@ -5,7 +5,7 @@ namespace Data.Models
 {
     public class CampaignConfiguration
     {
-        public Guid id { get; set; }
+        public Guid Id { get; set; }
 
         [Column(TypeName = "bigint")]
         public TimeSpan ModificationsPhaseDuration { get; set; }

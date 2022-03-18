@@ -2,8 +2,11 @@
 using Data.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Common;
+using Services.Authentication;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http.Headers;
 
 namespace ServerAPI.Controllers
 {
@@ -12,10 +15,12 @@ namespace ServerAPI.Controllers
     public class CampaignsController : ControllerBase
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IAuthService _jwtService;
 
-        public CampaignsController(ApplicationDbContext context)
+        public CampaignsController(ApplicationDbContext context, IAuthService jwtService)
         {
             _dbContext = context;
+            _jwtService = jwtService;
         }
 
         [HttpGet]
@@ -33,13 +38,29 @@ namespace ServerAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(CampaignInputModel input)
-        {//TODO: implement input models
-            //TODO: authenticate using header
-            //if (!ModelState.IsValid) return BadRequest(ModelState);
-            //var result = _campaignService.AddCampaign(input);
-            //return Ok(result);
-            return null;
+        public IActionResult Post(CampaignInputModel input, [FromHeader] string authorization)
+        {
+            if (AuthenticationHeaderValue.TryParse(authorization, out var headerValue))
+            {
+                var token = headerValue.Parameter;
+                if (!_jwtService.IsTokenValid(token)) Unauthorized("invalid token");
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                var item = _dbContext.Campaigns.FirstOrDefault(item => item.Name == input.Name);
+                if (item != null) BadRequest("cmapaing already exists");
+                _dbContext.Campaigns.Add(new Campaign(new CampaignConfiguration()
+                {
+                    DecryptionPhaseDuration = TimeSpan.FromMilliseconds(input.Settings.DecryptionPhaseDuration),
+                    ModificationsPhaseDuration = TimeSpan.FromMilliseconds(input.Settings.ModificationsPhaseDuration),
+                    PermutationLength = input.Settings.PermutationLength
+                })
+                {
+                    Description = input.Description,
+                    Name = input.Name,
+                    Type = input.Type
+                });
+            }
+            else return Unauthorized("missing token");
+            return Ok();
         }
 
         [HttpPut("{id}")]

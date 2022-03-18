@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace Data.Models.InputModels
 {
-    public class OrganisationUserRegisterInputModel
+    public class CampaignConfigurationInputModel
     {
         [Required]
-        public string Name { get; set; }
+        public long ModificationsPhaseDuration { get; set; }
 
         [Required]
-        public string Password { get; set; }
+        public long DecryptionPhaseDuration { get; set; }
 
-        //TODO:add their registering properties
+        [Required]
+        public int PermutationLength { get; set; }
     }
 }

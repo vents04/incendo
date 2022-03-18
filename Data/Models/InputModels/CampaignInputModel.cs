@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Data.Models.InputModels
 {
@@ -14,9 +13,6 @@ namespace Data.Models.InputModels
         public CampaignType Type { get; set; }
 
         [Required]
-        public List<CampaignItem> CampaignItems { get; set; }
-
-        [Required]
-        public CampaignConfiguration Settings { get; set; }
+        public CampaignConfigurationInputModel Settings { get; set; }
     }
 }

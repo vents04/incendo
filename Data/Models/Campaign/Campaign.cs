@@ -10,8 +10,12 @@ namespace Data.Models
 {
     public class Campaign : IArtefactable<Campaign>
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public CampaignType Type { get; set; }
         public List<CampaignPhase> Phases { get; set; }
         public Guid Id { get; set; }
+        public Guid OrganisationId { get; set; }
         public string OrganisationPublicKey { get; set; }
         public RSAKeyPair Key { get; set; }
         public CampaignConfiguration Configuration { get; set; }
