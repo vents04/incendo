@@ -16,7 +16,7 @@ namespace Data.Models
         public CampaignEvent(CampaignEventType type, string data)
         {
             this.data = data;
-            TimeStamp = DateTime.Now;
+            TimeStamp = DateTime.UtcNow;
             Id = Guid.NewGuid();
             Type = type;
         }

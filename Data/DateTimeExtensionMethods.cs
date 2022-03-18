@@ -4,11 +4,9 @@ namespace ExtensionMethods
 {
     public static class DateTimeExtensionMethods
     {
-        private static readonly DateTime unixStart = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-
         public static long ToUnixMilliseconds(this DateTime dateTime)
         {
-            var span = TimeZoneInfo.ConvertTimeToUtc(dateTime) - unixStart;
+            TimeSpan span = dateTime - DateTime.UnixEpoch;
             return (long)span.TotalMilliseconds;
         }
 
@@ -19,8 +17,8 @@ namespace ExtensionMethods
 
         public static DateTime FromUnixMilliseconds(this DateTime dateTime, long milliseconds)
         {
-            var span = TimeSpan.FromMilliseconds(milliseconds);
-            return unixStart + span;
+            TimeSpan span = TimeSpan.FromMilliseconds(milliseconds);
+            return DateTime.UnixEpoch + span;
         }
 
         public static DateTime FromUnixSeconds(this DateTime dateTime, long seconds)

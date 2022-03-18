@@ -29,13 +29,12 @@ namespace Data.Models
             get { return Phases.Count(); }
         }
 
-        public DateTime FinishTime { get; set; }
-        public DateTime ActivationTime { get; set; }
+        public DateTime? FinishTime { get; set; }
+        public DateTime? ActivationTime { get; set; }
         public string Hash { get; set; }
 
-        public Campaign()
+        private Campaign()
         {
-            Id = Guid.NewGuid();
         }
 
         public Campaign(CampaignConfiguration configuration)
@@ -71,9 +70,14 @@ namespace Data.Models
 
             RSAKeyPair campaignKey = RSAKeyPair.FromPublicKey(artefact.CampaignPublicKey);
 
-            CampaignConfiguration CampaignConfiguration = Serialization.DeserializeInheritor<CampaignConfiguration>(artefact.CampaignConfigurationType, artefact.CampaignConfigurationJson);
+            CampaignConfiguration CampaignConfiguration = new CampaignConfiguration()
+            {
+                DecryptionPhaseDuration = TimeSpan.FromMilliseconds(artefact.DecryptionPhaseDuration),
+                ModificationsPhaseDuration = TimeSpan.FromMilliseconds(artefact.ModificationsPhaseDuration),
+                PermutationLength = artefact.PermutationLength,
+            };
 
-            Campaign campaign = new Campaign(artefact.CampaignId, organisationPublicKey, campaignKey, CampaignConfiguration, artefact.ActivationTime);
+            Campaign campaign = new Campaign(Guid.Parse(artefact.CampaignId), organisationPublicKey, campaignKey, CampaignConfiguration, DateTime.UtcNow.FromUnixMilliseconds(artefact.ActivationTime));
             if (campaign.Hash != artefact.CampaignHash) throw new ContractException(ContractError.InvalidCampaign);
 
             return campaign;
@@ -81,15 +85,8 @@ namespace Data.Models
 
         private string ComputeHash()
         {
-            CampaignArtefact artefact = new CampaignArtefact
-            {
-                OrganisationPublicKey = OrganisationPublicKey,
-                CampaignId = Id,
-                CampaignPublicKey = Key.PublicKey,
-                ActivationTime = ActivationTime,
-                CampaignConfigurationType = Configuration.GetType().Name,
-                CampaignConfigurationJson = JsonSerializer.Serialize(Configuration, Configuration.GetType())
-            };
+            CampaignArtefact artefact = GetArtefact() as CampaignArtefact;
+            artefact.Hash = null;
 
             string json = JsonSerializer.Serialize(artefact, artefact.GetType());
             SHA512CryptoServiceProvider sha512Provier = new SHA512CryptoServiceProvider();
@@ -98,18 +95,18 @@ namespace Data.Models
 
         public override Artefact GetArtefact()
         {
-            CampaignArtefact artefact = new CampaignArtefact
+            return new CampaignArtefact
             {
                 OrganisationPublicKey = OrganisationPublicKey,
-                CampaignId = Id,
+                CampaignId = Id.ToString(),
                 CampaignPublicKey = Key.PublicKey,
-                ActivationTime = ActivationTime,
-                CampaignConfigurationType = Configuration.GetType().Name,
-                CampaignConfigurationJson = JsonSerializer.Serialize(Configuration, Configuration.GetType()),
+                ActivationTime = ActivationTime != null ? ((DateTime)ActivationTime).ToUnixMilliseconds() : 0,
+                ModificationsPhaseDuration = (long)Configuration.ModificationsPhaseDuration.TotalMilliseconds,
+                DecryptionPhaseDuration = (long)Configuration.DecryptionPhaseDuration.TotalMilliseconds,
+                PermutationLength = Configuration.PermutationLength,
+                LastStateChangedTime = LastStateChange.ToUnixMilliseconds(),
                 CampaignHash = Hash
             };
-
-            return artefact;
         }
 
         public void Activate()
@@ -117,7 +114,7 @@ namespace Data.Models
             if (State != CampaignState.Inactive) throw new InvalidOperationException();
 
             State = CampaignState.Active;
-            ActivationTime = DateTime.Now;
+            ActivationTime = DateTime.UtcNow;
             Hash = ComputeHash();
             Events.Add(new CampaignEvent(CampaignEventType.Activated, ""));
         }
@@ -184,7 +181,7 @@ namespace Data.Models
             Events.Add(new CampaignEvent(CampaignEventType.PermutationKeyReceived, modification.GetKeyArtefact().ToString()));//TODO: serialize all event data additions
 
             var resultArtefact = artefact as ModificationKeyConfirmationArtefact;
-            resultArtefact.KeyRecordTime = DateTime.Now.ToUnixMilliseconds();
+            resultArtefact.KeyRecordTime = DateTime.UtcNow.ToUnixMilliseconds();
             return resultArtefact;
         }
 
@@ -196,7 +193,7 @@ namespace Data.Models
 
             bool missingKey = currentPhase.ParticipantPublicKeyToModification.Values.Any(modification => !modification.Permutation.HasKey);
 
-            LastStateChange = DateTime.Now;
+            LastStateChange = DateTime.UtcNow;
             Events.Add(new CampaignEvent(CampaignEventType.Activated, GetCampaignStateArtefact().ToString()));
             State = missingKey ? CampaignState.Active : CampaignState.Finished;
             if (missingKey)
@@ -211,7 +208,7 @@ namespace Data.Models
         {
             if ((State == CampaignState.Finished) || (State != CampaignState.Failed)) throw new InvalidOperationException();
             State = CampaignState.Failed;
-            LastStateChange = DateTime.Now;
+            LastStateChange = DateTime.UtcNow;
         }
 
         public virtual CampaignOutcome GetOutcome()
@@ -233,7 +230,7 @@ namespace Data.Models
                 PhaseOutcomes = outcomes,
                 OutcomeType = GetOutcome().GetType().Name,
                 OutcomeJson = JsonSerializer.Serialize(GetOutcome(), GetOutcome().GetType()),
-                FinishTime = FinishTime.ToUnixMilliseconds(),
+                FinishTime = FinishTime != null ? ((DateTime)FinishTime).ToUnixMilliseconds() : 0,
             };
         }
 

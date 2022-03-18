@@ -44,7 +44,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.getCampaigns();
+    //this.getCampaigns();
   }
 
   getCampaigns = () => {

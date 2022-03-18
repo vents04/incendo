@@ -5,6 +5,7 @@ using ServerAPI.Common;
 using Services.Authentication;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 
@@ -21,6 +22,15 @@ namespace ServerAPI.Controllers
         {
             _dbContext = context;
             _jwtService = jwtService;
+
+            foreach (var item in _dbContext.RSAKeyPair)
+            {
+                Debug.WriteLine(item.Id);
+            }
+            foreach (var item in _dbContext.CampaignConfiguration)
+            {
+                Debug.WriteLine(item.Id);
+            }
         }
 
         [HttpGet]

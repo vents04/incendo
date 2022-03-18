@@ -97,7 +97,7 @@ namespace Data.Models
 
             if (validateResponseTime)
             {
-                long timeDelta = DateTime.Now.ToUnixMilliseconds() - artefact.TimeRecorded;
+                long timeDelta = DateTime.UtcNow.ToUnixMilliseconds() - artefact.TimeRecorded;
                 if ((timeDelta < -60) || (timeDelta > 60)) throw new ContractException(ContractError.ValidationTimeout);
             }
 
@@ -113,7 +113,7 @@ namespace Data.Models
 
             if (validateResponseTime)
             {
-                long timeDelta = DateTime.Now.ToUnixMilliseconds() - artefact.KeyRecordTime;
+                long timeDelta = DateTime.UtcNow.ToUnixMilliseconds() - artefact.KeyRecordTime;
                 if ((timeDelta < -60) || (timeDelta > 60)) throw new ContractException(ContractError.ValidationTimeout);
             }
 
@@ -127,7 +127,7 @@ namespace Data.Models
         {
             ValidateArtefact(artefact);
             isRecorded = true;
-            timeRecorded = DateTime.Now;
+            timeRecorded = DateTime.UtcNow;
         }
 
         public void AddKey(ModificationKeyArtefact artefact)
@@ -137,7 +137,7 @@ namespace Data.Models
 
             PermutationKey = artefact.PermutationKey;
             Permutation.AddKey(PermutationKey);
-            keyRecordTime = DateTime.Now;
+            keyRecordTime = DateTime.UtcNow;
         }
 
         public ModificationOutcome GetOutcome()

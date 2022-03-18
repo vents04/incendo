@@ -11,6 +11,8 @@ namespace ServerAPI.Common
         }
 
         public DbSet<Campaign> Campaigns { get; set; }
+        public DbSet<RSAKeyPair> RSAKeyPair { get; set; }
+        public DbSet<CampaignConfiguration> CampaignConfiguration { get; set; }
         public DbSet<OrganisationUser> OrganisationUsers { get; set; }
     }
 }

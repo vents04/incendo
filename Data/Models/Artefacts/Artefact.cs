@@ -19,7 +19,7 @@ namespace Data.Models
         {
             if (challenge == null || challenge.Length < 1 || key == null || key.PublicKey == null || key.PublicKey.Length < 1) throw new ArgumentNullException();
             ArtefactType = GetType().Name;
-            IssueTime = DateTime.Now.ToUnixMilliseconds();
+            IssueTime = DateTime.UtcNow.ToUnixMilliseconds();
             Challenge = challenge;
             SignaturePublicKey = key.PublicKey;
             Hash = null;
@@ -42,7 +42,7 @@ namespace Data.Models
 
             if (validateResponseTime)
             {
-                double timeDelta = (DateTime.Now.FromUnixMilliseconds(IssueTime) - DateTime.UtcNow).TotalSeconds;
+                double timeDelta = (DateTime.UtcNow.FromUnixMilliseconds(IssueTime) - DateTime.UtcNow).TotalSeconds;
                 if ((timeDelta < -60) || (timeDelta > 60)) throw new ContractException(ContractError.ValidationTimeout);
             }
 
