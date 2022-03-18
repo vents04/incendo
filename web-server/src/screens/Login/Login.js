@@ -8,7 +8,7 @@ import { Link, Navigate } from 'react-router-dom'
 export default class Login extends Component {
 
   state = {
-    email: "",
+    name: "",
     password: "",
     navigateToHome: false,
     showError: false,
@@ -16,11 +16,23 @@ export default class Login extends Component {
   }
 
   login = () => {
-    if (this.state.email.length == 0 || this.state.password.length == 0) {
+    if (this.state.name.length == 0 || this.state.password.length == 0) {
       this.setState({ showError: true, error: "Please fill in all the fields" });
       return;
     }
-    this.setState({ navigateToHome: true });
+    ApiRequests.post("users/register", {}, {
+    }, false).then((response) => {
+      Auth.setToken(response.body.token);
+      this.setState({ navigateToHome: true });
+    }).catch((error) => {
+      if (error.response) {
+          this.setState({ error: error.response.data, showError: true });
+      } else if (error.request) {
+          this.setState({ showError: true, error: "Response not returned" });
+      } else {
+          this.setState({ showError: true, error: "Request setting error" });
+      }
+    })
   }
 
   render() {
@@ -37,9 +49,9 @@ export default class Login extends Component {
           </div>
           <div className="modal-content">
             <div className="modal-input-container">
-              <p className="modal-input-hint">Email</p>
+              <p className="modal-input-hint">Name</p>
               <input type="text" className="modal-input" onInput={(evt) => {
-                this.setState({ email: evt.target.value });
+                this.setState({ name: evt.target.value });
               }} />
             </div>
             <div className="modal-input-container">
