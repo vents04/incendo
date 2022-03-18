@@ -4,12 +4,13 @@ import './Signup.scss'
 
 import { VscWorkspaceTrusted } from 'react-icons/vsc'
 import { Link, Navigate } from 'react-router-dom'
+import ApiRequests from '../../classes/ApiRequests'
+import Auth from '../../classes/Auth'
 
 export default class Signup extends Component {
 
   state = {
     name: "",
-    email: "",
     password: "",
     navigateToHome: false,
     showError: false,
@@ -17,11 +18,23 @@ export default class Signup extends Component {
   }
 
   signup = () => {
-    if (this.state.name.length == 0 || this.state.email.length == 0 || this.state.password.length == 0) {
+    if (this.state.name.length == 0 || this.state.password.length == 0) {
       this.setState({ showError: true, error: "Please fill in all the fields" });
       return;
     }
-    this.setState({ navigateToHome: true });
+    ApiRequests.post("users/register", {}, {
+    }, false).then((response) => {
+      Auth.setToken(response.body.token);
+      this.setState({ navigateToHome: true });
+    }).catch((error) => {
+      if (error.response) {
+          this.setState({ error: error.response.data, showError: true });
+      } else if (error.request) {
+          this.setState({ showError: true, error: "Response not returned" });
+      } else {
+          this.setState({ showError: true, error: "Request setting error" });
+      }
+    })
   }
 
   render() {
@@ -41,12 +54,6 @@ export default class Signup extends Component {
               <p className="modal-input-hint">Name</p>
               <input type="text" className="modal-input" onInput={(evt) => {
                 this.setState({ name: evt.target.value, showError: false });
-              }} />
-            </div>
-            <div className="modal-input-container">
-              <p className="modal-input-hint">Email</p>
-              <input type="text" className="modal-input" onInput={(evt) => {
-                this.setState({ email: evt.target.value, showError: false });
               }} />
             </div>
             <div className="modal-input-container">
