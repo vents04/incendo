@@ -40,9 +40,9 @@ namespace ServerAPI.Controllers
         [HttpPost]
         public IActionResult Post(CampaignInputModel input, [FromHeader] string authorization)
         {
-            if (AuthenticationHeaderValue.TryParse(authorization, out var headerValue))
+            if (!authorization.Equals(string.Empty))
             {
-                var token = headerValue.Parameter;
+                var token = authorization;
                 if (!_jwtService.IsTokenValid(token)) Unauthorized("invalid token");
                 if (!ModelState.IsValid) return BadRequest(ModelState);
                 var item = _dbContext.Campaigns.FirstOrDefault(item => item.Name == input.Name);
@@ -58,6 +58,7 @@ namespace ServerAPI.Controllers
                     Name = input.Name,
                     Type = input.Type
                 });
+                _dbContext.SaveChanges();
             }
             else return Unauthorized("missing token");
             return Ok();

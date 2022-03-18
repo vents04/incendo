@@ -4,7 +4,7 @@ const URLS = {
         APP: "https://prom.uploy.app"
     },
     DEVELOPMENT: {
-        API: "http://localhost:44318",
+        API: "http://localhost:13353/api",
         APP: "http://localhost:3000"
     }
 }
@@ -12,5 +12,11 @@ const URLS = {
 module.exports = {
     ROOT_URL_API: URLS.DEVELOPMENT.API,
     ROOT_URL_PORTAL: URLS.DEVELOPMENT.APP,
-    AUTHENTICATION_TOKEN_KEY: "Authorization"
+    AUTHENTICATION_TOKEN_KEY: "Authorization",
+    MILLISECONDS_IN_A_MINUTE: 60000,
+    CAMPAIGN_TYPES: {
+        SELECT: "Select",
+        SHUFFLE: "Shuffle",
+        ASSIGN: "Assign"
+    }
 }

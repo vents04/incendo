@@ -4,6 +4,8 @@ import './Login.scss'
 
 import { VscWorkspaceTrusted } from 'react-icons/vsc'
 import { Link, Navigate } from 'react-router-dom'
+import ApiRequests from '../../classes/ApiRequests'
+import Auth from '../../classes/Auth'
 
 export default class Login extends Component {
 
@@ -20,9 +22,11 @@ export default class Login extends Component {
       this.setState({ showError: true, error: "Please fill in all the fields" });
       return;
     }
-    ApiRequests.post("users/register", {}, {
+    ApiRequests.post("users/login", {}, {
+      name: this.state.name,
+      password: this.state.password
     }, false).then((response) => {
-      Auth.setToken(response.body.token);
+      Auth.setToken(response.data.token);
       this.setState({ navigateToHome: true });
     }).catch((error) => {
       if (error.response) {

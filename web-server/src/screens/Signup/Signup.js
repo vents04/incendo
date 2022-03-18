@@ -23,10 +23,13 @@ export default class Signup extends Component {
       return;
     }
     ApiRequests.post("users/register", {}, {
+      name: this.state.name,
+      password: this.state.password
     }, false).then((response) => {
-      Auth.setToken(response.body.token);
+      Auth.setToken(response.data.token);
       this.setState({ navigateToHome: true });
     }).catch((error) => {
+      console.log(error)
       if (error.response) {
           this.setState({ error: error.response.data, showError: true });
       } else if (error.request) {

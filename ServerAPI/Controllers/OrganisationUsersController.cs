@@ -3,6 +3,7 @@ using Data.Models.InputModels;
 using Microsoft.AspNetCore.Mvc;
 using ServerAPI.Common;
 using Services.Authentication;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -55,12 +56,14 @@ namespace ServerAPI.Controllers
             if (!ModelState.IsValid) return BadRequest("Invalid request structure");
             var item = _dbContext.OrganisationUsers.FirstOrDefault(user => user.Name == input.Name);
             if (item != null) return BadRequest("User already exists");
-            _dbContext.OrganisationUsers.Add(new OrganisationUser()
+            item = new OrganisationUser()
             {
+                Id = Guid.NewGuid(),
                 Name = input.Name,
                 PasswordHash = Encoding.ASCII.GetString(cryptoProvider.ComputeHash(Encoding.ASCII.GetBytes(input.Password)))
                 //TODO:bind other parameters
-            });
+            };
+            _dbContext.OrganisationUsers.Add(item);
             _dbContext.SaveChanges();
             return Ok(new TokenResponse
             {

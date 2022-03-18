@@ -19,7 +19,7 @@ namespace Data.Models
         public string OrganisationPublicKey { get; set; }
         public RSAKeyPair Key { get; set; }
         public CampaignConfiguration Configuration { get; set; }
-        public List<CampaignEvent> Events { get; set; }
+        public List<CampaignEvent> Events { get; set; } = new List<CampaignEvent>();
         public CampaignState State { get; set; }
         public DateTime LastStateChange { get; set; }
         public CampaignOutcome Outcome { get; set; }
