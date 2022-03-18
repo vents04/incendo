@@ -4,7 +4,7 @@ const URLS = {
         APP: "https://prom.uploy.app"
     },
     DEVELOPMENT: {
-        API: "http://localhost:13353/api",
+        API: "http://172.17.2.238:13353/api",
         APP: "http://localhost:3000"
     }
 }
@@ -18,5 +18,12 @@ module.exports = {
         SELECT: "Select",
         SHUFFLE: "Shuffle",
         ASSIGN: "Assign"
+    },
+    CAMPAIGN_STATES: {
+        INACTIVE: "Inactive",
+        ACTIVE: "Active",
+        SEALED: "Sealed",
+        FINISHED: "Finished",
+        FAILED: "Failed"
     }
 }

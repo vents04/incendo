@@ -1,13 +1,5 @@
 @import "../../../assets/styles/global.styles.css";
 
-.campaign-container {
-  flex: 50%;
-  margin-bottom: 20px;
-  max-width: 50%;
-  margin-right: 1rem;
-  height: 100%;
-}
-
 .campaigns {
   display: flex;
   flex-wrap: wrap;
@@ -35,70 +27,6 @@
 
 .section-content {
   margin-top: 2rem;
-}
-
-.campaign {
-  border-radius: 4px;
-  border: 1px solid #e7e7e7;
-  padding: 1.5rem;
-  height: 100%;
-  cursor: pointer;
-  transition: all 0.4s ease-in-out;
-}
-
-.campaign-topbar {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  position: relative;
-}
-
-.campaign-type {
-  font-family: "Main Bold", sans-serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: gray;
-}
-
-.campaign-action-text {
-  font-family: "Main Bold", sans-serif;
-  font-size: 0.9rem;
-  color: #66d37e;
-  cursor: pointer;
-}
-
-.campaign-name {
-  font-family: "Main Medium", sans-serif;
-  font-size: 1.25rem;
-  margin-bottom: 12px;
-}
-
-.campaign-description {
-  font-family: "Main Regular", sans-serif;
-  font-size: 1rem;
-  color: #777;
-  margin-bottom: 12px;
-}
-
-.highlighted-label {
-  font-family: "Main Bold", sans-serif;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: white;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  background-color: #66d37e;
-  width: max-content;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.campaign-setting {
-  font-family: "Main Regular", sans-serif;
-  font-size: 0.9rem;
 }
 
 .deny {

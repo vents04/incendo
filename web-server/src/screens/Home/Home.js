@@ -5,19 +5,34 @@ import './Home.scss'
 import AddCampaign from '../../components/AddCampaign/AddCampaign'
 import { Link } from 'react-router-dom'
 import AreYouSure from '../../components/AreYouSure/AreYouSure'
+import Campaign from '../../components/Campaign/Campaign'
 
 export default class Home extends Component {
 
   state = {
-    campaigns: [{
-      name: "test",
-      show: true,
+    campaigns: [
+      {
+        id: "1",
+      name: "Campaign name",
+      description: "Camapaign description",
+      type: "Shuffle",
+      settings: {
+        modificationsPhaseDuration: 84000,
+        decryptionPhaseDuration: 96000,
+        permutationLength: 3
+      },
+      state: "Active"
     }, {
-      name: "2",
-      show: true,
-    }, {
-      name: "testing",
-      show: true,
+      id: "2",
+      name: "Campaign name 2",
+      description: "Camapaign description 2",
+      type: "Assign",
+      settings: {
+        modificationsPhaseDuration: 84000,
+        decryptionPhaseDuration: 96000,
+        permutationLength: 3
+      },
+      state: "Inactive"
     }],
     showAddCampaignModal: false,
     showAreYouSureModal: false,
@@ -58,7 +73,7 @@ export default class Home extends Component {
     return (
       <div>
         <Navbar showAuthButtons={true} />
-        {this.state.showAddCampaignModal && <AddCampaign toggleShowAddCampaignModal={this.toggleShowAddCampaignModal} />}
+        {this.state.showAddCampaignModal && <AddCampaign toggleShowAddCampaignModal={this.toggleShowAddCampaignModal} removeCampaign={this.removeCampaign} activateCampaign={this.activateCampaign} />}
         {this.state.showAreYouSureModal && <AreYouSure
           intention={this.state.intention}
           toggleShowAreYouSureModal={this.toggleShowAreYouSureModal}
@@ -73,57 +88,11 @@ export default class Home extends Component {
             <input type="text" className="search" placeholder="Search campaigns..." onInput={this.search}></input>
             <div className="section-content">
               <div className="campaigns">
-                <div className="campaign-container">
-                  <Link to="/view-campaign/1">
-                    <div className="campaign">
-                      <div className="campaign-topbar">
-                        <p className="campaign-type">Shuffle</p>
-                        <p className="highlighted-label">Activated</p>
-                      </div>
-                      <p className="campaign-name">Campaign name</p>
-                      <p className="campaign-description">Campaign description dddddddddddddddddddddddddddd sad asdaskkd jasndlj basljkdbnaskbdl bashdbvlqewbdlbas doas hdas sdi asbbdasb dlas dnasli dasibd lhas</p>
-                      <span className="campaign-setting">2h25m mod duration</span>
-                      &nbsp;&middot;&nbsp;
-                      <span className="campaign-setting">2h25m key duration</span>
-                    </div>
-                  </Link>
-                </div>
-                <div className="campaign-container">
-                  <div className="campaign">
-                    <div className="campaign-topbar">
-                      <p className="campaign-type">Shuffle</p>
-                      <Link to="/edit-campaign/1">
-                        <p className="campaign-action-text">Edit</p>
-                      </Link>
-                    </div>
-                    <p className="campaign-name">Campaign name</p>
-                    <p className="campaign-description">Campaign description</p>
-                    <button className="action-button deny" onClick={() => {
-                      this.setState({
-                        intention: "remove",
-                        intentionId: "1",
-                        showAreYouSureModal: true,
-                      })
-                    }}>Remove campaign</button>
-                  </div>
-                </div>
-                <div className="campaign-container">
-                  <div className="campaign">
-                    <div className="campaign-topbar">
-                      <p className="campaign-type">Shuffle</p>
-                      <p className="campaign-action-text">Edit</p>
-                    </div>
-                    <p className="campaign-name">Campaign name</p>
-                    <p className="campaign-description">Campaign description</p>
-                    <p className="action-text" onClick={() => {
-                      this.setState({
-                        intention: "activate",
-                        intentionId: "1",
-                        showAreYouSureModal: true,
-                      })
-                    }}>Activate campaign</p>
-                  </div>
-                </div>
+              {
+                this.state.campaigns.map(campaign => 
+                  <Campaign campaign={campaign}/>
+                  )
+                }
               </div>
             </div>
           </div>
