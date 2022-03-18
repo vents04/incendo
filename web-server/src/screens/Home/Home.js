@@ -6,6 +6,7 @@ import AddCampaign from '../../components/AddCampaign/AddCampaign'
 import { Link } from 'react-router-dom'
 import AreYouSure from '../../components/AreYouSure/AreYouSure'
 import Campaign from '../../components/Campaign/Campaign'
+import ApiRequests from '../../classes/ApiRequests'
 
 export default class Home extends Component {
 
@@ -45,11 +46,31 @@ export default class Home extends Component {
   }
 
   removeCampaign = (id) => {
-
+    ApiRequests.delete(`campaigns/${id}`, {}, true).then((response) => {
+      this.getCampaigns();
+    }).catch((error) => {
+      if (error.response) {
+          this.setState({ error: error.response.data, showError: true });
+      } else if (error.request) {
+          this.setState({ showError: true, error: "Response not returned" });
+      } else {
+          this.setState({ showError: true, error: "Request setting error" });
+      }
+    })
   }
 
   activateCampaign = (id) => {
-
+    ApiRequests.put(`campaigns/${id}/activate`, {}, true).then((response) => {
+      this.getCampaigns();
+    }).catch((error) => {
+      if (error.response) {
+          this.setState({ error: error.response.data, showError: true });
+      } else if (error.request) {
+          this.setState({ showError: true, error: "Response not returned" });
+      } else {
+          this.setState({ showError: true, error: "Request setting error" });
+      }
+    })
   }
 
   toggleShowAddCampaignModal = (state) => {
