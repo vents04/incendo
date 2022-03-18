@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -8,9 +9,14 @@ namespace Data.Models
     public class RSAKeyPair
     {
         public Guid Id { get; set; }
+
+        [NotMapped]
         public const int RSABitCount = 2048;
-        public readonly string PublicKey;
-        public readonly string PrivateKey;
+
+        public string PublicKey { get; set; }
+        public string PrivateKey { get; set; }
+
+        [NotMapped]
         public readonly RSACryptoServiceProvider Provider;
 
         private RSAKeyPair()
