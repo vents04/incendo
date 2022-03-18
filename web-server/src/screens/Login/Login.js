@@ -44,7 +44,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="centered-content">
+      <div className="centered-content auth-page">
         {this.state.navigateToHome && <Navigate to="/home" />}
         <div className="modal-box">
           <div className="modal-topbar">
@@ -52,7 +52,7 @@ export default class Login extends Component {
               <VscWorkspaceTrusted className="logo" size={20} color="#66d37e" />
               <p className="logo-title-modal">Incendo</p>
             </div>
-            <p className="page-title">&nbsp;|&nbsp;Portal login</p>
+            <p className="page-title">Portal login</p>
           </div>
           <div className="modal-content">
             <div className="modal-input-container">
@@ -73,8 +73,7 @@ export default class Login extends Component {
             <button className="action-button" onClick={this.login}>
               {this.state.showLoading ? "Logging in..." : "Continue"}
             </button>
-            <p className="modal-notation">If you do not have an account
-              &nbsp;
+            <p className="modal-notation">If you do not have an account&nbsp;
               <Link to="/signup">
                 <span className="modal-action-text">create one.</span>
               </Link>

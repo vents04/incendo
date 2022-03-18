@@ -44,7 +44,7 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div className="centered-content">
+      <div className="centered-content auth-page">
         {this.state.navigateToHome && <Navigate to="/home" />}
         <div className="modal-box">
           <div className="modal-topbar">
@@ -52,7 +52,7 @@ export default class Signup extends Component {
               <VscWorkspaceTrusted className="logo" size={20} color="#66d37e" />
               <p className="logo-title-modal">Incendo</p>
             </div>
-            <p className="page-title">&nbsp;|&nbsp;Portal signup</p>
+            <p className="page-title">Portal signup</p>
           </div>
           <div className="modal-content">
             <div className="modal-input-container">
@@ -73,8 +73,7 @@ export default class Signup extends Component {
             <button className="action-button" onClick={this.signup}>
               {this.state.showLoading ? "Signing up..." : "Continue"}
             </button>
-            <p className="modal-notation">If you do have an account
-              &nbsp;
+            <p className="modal-notation">If you do have an account&nbsp;
               <Link to="/login">
                 <span className="modal-action-text">login here.</span>
               </Link>
