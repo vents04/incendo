@@ -4,7 +4,7 @@ const URLS = {
         APP: "https://prom.uploy.app"
     },
     DEVELOPMENT: {
-        API: "http://172.17.2.238:13353/api",
+        API: "http://localhost:13353/api",
         APP: "http://localhost:3000"
     }
 }

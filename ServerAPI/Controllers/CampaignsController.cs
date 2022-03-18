@@ -24,9 +24,14 @@ namespace ServerAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Campaign> Get()
+        public IActionResult Get()
         {
-            return _dbContext.Campaigns;
+            var artefacts = new List<CampaignArtefact>();
+            foreach (var item in _dbContext.Campaigns)
+            {
+                artefacts.Add(item.GetArtefact() as CampaignArtefact);
+            }
+            return Ok(artefacts);
         }
 
         [HttpGet("{id}")]
@@ -44,19 +49,24 @@ namespace ServerAPI.Controllers
             {
                 var token = authorization;
                 if (!_jwtService.IsTokenValid(token)) Unauthorized("invalid token");
+                var claims = _jwtService.GetTokenClaims(token);
                 if (!ModelState.IsValid) return BadRequest(ModelState);
                 var item = _dbContext.Campaigns.FirstOrDefault(item => item.Name == input.Name);
                 if (item != null) BadRequest("cmapaing already exists");
-                _dbContext.Campaigns.Add(new Campaign(new CampaignConfiguration()
+                var config = new CampaignConfiguration()
                 {
                     DecryptionPhaseDuration = TimeSpan.FromMilliseconds(input.Settings.DecryptionPhaseDuration),
                     ModificationsPhaseDuration = TimeSpan.FromMilliseconds(input.Settings.ModificationsPhaseDuration),
                     PermutationLength = input.Settings.PermutationLength
-                })
+                };
+                var organisationId = claims.FirstOrDefault(claim => claim.Type == "Id").Value;
+                if (string.IsNullOrEmpty(organisationId)) BadRequest("invalid token claims");
+                _dbContext.Campaigns.Add(new Campaign(config)
                 {
                     Description = input.Description,
                     Name = input.Name,
-                    Type = input.Type
+                    Type = input.Type,
+                    OrganisationId = Guid.Parse(organisationId)
                 });
                 _dbContext.SaveChanges();
             }

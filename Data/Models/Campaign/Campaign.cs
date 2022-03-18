@@ -44,6 +44,7 @@ namespace Data.Models
 
             Id = Guid.NewGuid();
             Key = RSAKeyPair.Create();
+            OrganisationPublicKey = Key.PublicKey;
             Configuration = configuration;
             Hash = ComputeHash();
 
