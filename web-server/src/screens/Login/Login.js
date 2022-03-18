@@ -14,10 +14,12 @@ export default class Login extends Component {
     password: "",
     navigateToHome: false,
     showError: false,
-    error: ""
+    error: "",
+    showLoading: false
   }
 
   login = () => {
+    this.setState({showError: false, error: "", showLoading: true});
     if (this.state.name.length == 0 || this.state.password.length == 0) {
       this.setState({ showError: true, error: "Please fill in all the fields" });
       return;
@@ -27,8 +29,9 @@ export default class Login extends Component {
       password: this.state.password
     }, false).then((response) => {
       Auth.setToken(response.data.token);
-      this.setState({ navigateToHome: true });
+      this.setState({showLoading: false, navigateToHome: true});
     }).catch((error) => {
+      this.setState({showLoading: false});
       if (error.response) {
           this.setState({ error: error.response.data, showError: true });
       } else if (error.request) {
@@ -67,7 +70,9 @@ export default class Login extends Component {
             {
               this.state.showError && <p className="error-box">{this.state.error}</p>
             }
-            <button className="action-button" onClick={this.login}>Continue</button>
+            <button className="action-button" onClick={this.login}>
+              {this.state.showLoading ? "Logging in..." : "Continue"}
+            </button>
             <p className="modal-notation">If you do not have an account
               &nbsp;
               <Link to="/signup">
