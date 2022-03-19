@@ -44,7 +44,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    //this.getCampaigns();
+    this.getCampaigns();
   }
 
   getCampaigns = () => {
@@ -54,9 +54,9 @@ export default class Home extends Component {
       if (error.response) {
           this.setState({ error: error.response.data, showError: true });
       } else if (error.request) {
-          this.setState({ showError: true, error: "Response not returned" });
+          this.setState({ showError: true, error: "Could not get campaigns because response was not returned" });
       } else {
-          this.setState({ showError: true, error: "Request setting error" });
+          this.setState({ showError: true, error: "Could not get campaigns because there was a request setting error" });
       }
     })
   }

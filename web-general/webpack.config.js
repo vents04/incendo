@@ -7,7 +7,7 @@ module.exports = {
     },
     devServer: {
         port: 3002,
-        watchContentBase: true,
+        hot: true,
         historyApiFallback: true,
     },
     module: {
